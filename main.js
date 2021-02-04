@@ -116,7 +116,6 @@ module.exports.loop = function () {
     (c) => c.memory.role == "upgrader"
   );
   var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == "builder");
-
   var numberOfRepairers = _.sum(
     Game.creeps,
     (c) => c.memory.role == "repairer"
@@ -191,10 +190,10 @@ module.exports.loop = function () {
     // try to spawn one
     name = mySpawn.createCustomCreep(800, "miner");
   } 
-  else if (numberOfTerminalTranspoter < minimumNumberOfMiner) {
-    // try to spawn one
-    name = mySpawn.createCustomCreep(800, "terminalTranspoter");
-  } 
+  // else if (numberOfTerminalTranspoter < minimumNumberOfMiner) {
+  //   // try to spawn one
+  //   name = mySpawn.createCustomCreep(800, "terminalTranspoter");
+  // } 
   else if (
     Game.rooms.W7N14.storage.store[RESOURCE_ENERGY] >= 100000 &&
     numberOfBuilders < 1
