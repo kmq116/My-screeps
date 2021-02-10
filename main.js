@@ -1,14 +1,15 @@
 // 导入模块
 require("prototype.spawn")();
-var roleHarvester = require("role.harvester");
-var roleUpgrader = require("role.upgrader");
-var roleBuilder = require("role.builder");
-var roleRepairer = require("role.repairer");
-var roleWallRepairer = require("role.wallRepairer");
-var roleCarrier = require("role.carrier");
-var roleTransporter = require("role.transporter");
-var roleMiner = require("role.miner");
-var roleTerminalTranspoter = require("role.terminalTranspoter");
+const roleHarvester = require("role.harvester");
+const roleUpgrader = require("role.upgrader");
+const roleBuilder = require("role.builder");
+const roleRepairer = require("role.repairer");
+const roleWallRepairer = require("role.wallRepairer");
+const roleCarrier = require("role.carrier");
+const roleTransporter = require("role.transporter");
+const roleMiner = require("role.miner");
+const roleTerminalTranspoter = require("role.terminalTranspoter");
+const config = require("config");
 
 module.exports.loop = function () {
   const linkDown = Game.rooms["W7N14"].lookForAt("structure", 44, 30)[0];
@@ -39,165 +40,117 @@ module.exports.loop = function () {
 
   // 遍历所有creeps 分角色执行任务
   for (let name in Game.creeps) {
-    // get the creep object
-    var creep = Game.creeps[name];
-
-    // if creep is harvester, call harvester script
-    if (
-      creep.memory.role == "harvester1" ||
-      creep.memory.role == "harvester2"
-    ) {
-      roleHarvester.run(creep);
-    }
-    // if creep is upgrader, call upgrader script
-    else if (creep.memory.role == "upgrader") {
-      roleUpgrader.run(creep);
-    }
-    // if creep is builder, call builder script
-    else if (creep.memory.role == "builder") {
-      roleBuilder.run(creep);
-    }
-    // if creep is repairer, call repairer script
-    else if (creep.memory.role == "repairer") {
-      roleRepairer.run(creep);
-    }
-    // if creep is wallRepairer, call wallRepairer script
-    else if (creep.memory.role == "wallRepairer") {
-      roleWallRepairer.run(creep);
-    } 
-    else if (creep.memory.role == "carrier") {
-      roleCarrier.run(creep);
-    } 
-    else if (creep.memory.role == "transporter") {
-      roleTransporter.run(creep);
-    } 
-    else if (creep.memory.role == "terminalTranspoter") {
-      roleTerminalTranspoter.run(creep);
-    } 
-    else if (creep.memory.role == "miner") {
-      roleMiner.run(creep);
-    }
+    // 获得角色
+    let creep = Game.creeps[name];
+    // 最小角色
+    let minRoles = {
+      harvester1: () => {
+        roleHarvester.run(creep);
+      },
+      harvester2: () => {
+        roleHarvester.run(creep);
+      },
+      upgrader: () => {
+        roleUpgrader.run(creep);
+      },
+      builder: () => {
+        roleBuilder.run(creep);
+      },
+      repairer: () => {
+        roleRepairer.run(creep);
+      },
+      wallRepairer: () => {
+        roleWallRepairer.run(creep);
+      },
+      carrier: () => {
+        roleCarrier.run(creep);
+      },
+      transporter: () => {
+        roleTransporter.run(creep);
+      },
+      terminalTranspoter: () => {
+        roleTerminalTranspoter.run(creep);
+      },
+      miner: () => {
+        roleMiner.run(creep);
+      },
+    };
+    minRoles[creep.memory.role]();
   }
 
   //获得自己房间里的所有建筑
-  var towers = Game.rooms.W7N14.find(FIND_STRUCTURES, {
+  let towers = Game.rooms.W7N14.find(FIND_STRUCTURES, {
     filter: (s) => s.structureType == STRUCTURE_TOWER,
   });
   for (let tower of towers) {
-    var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+    let target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
     if (target != undefined) {
       tower.attack(target);
     }
   }
-
-  // 设置不同角色最小值
-  var minimumNumberOfHarvesters = 1;
-  var minimumNumberOfUpgraders = 1;
-  var minimumNumberOfBuilders = 1;
-  var minimumNumberOfRepairers = 1;
-  var minimumNumberOfWallRepairers = 1;
-  var minimumNumberOfCarrier = 2;
-  var minimumNumberOfTransporter = 1;
-  var minimumNumberOfMiner = 1;
-
   // 获得每个角色数量
   // _.sum will count the number of properties in Game.creeps filtered by the
   //  arrow function, which checks for the creep being a harvester
-  var numberOfHarvesters1 = _.sum(
+  let numberOfHarvesters1 = _.sum(
     Game.creeps,
     (c) => c.memory.role == "harvester1"
   );
-  var numberOfHarvesters2 = _.sum(
+  let numberOfHarvesters2 = _.sum(
     Game.creeps,
     (c) => c.memory.role == "harvester2"
   );
-  var numberOfUpgraders = _.sum(
+  let numberOfUpgraders = _.sum(
     Game.creeps,
     (c) => c.memory.role == "upgrader"
   );
-  var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == "builder");
-  var numberOfRepairers = _.sum(
+  let numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == "builder");
+  let numberOfRepairers = _.sum(
     Game.creeps,
     (c) => c.memory.role == "repairer"
   );
-  var numberOfWallRepairers = _.sum(
+  let numberOfWallRepairers = _.sum(
     Game.creeps,
     (c) => c.memory.role == "wallRepairer"
   );
-  var numberOfCarrier = _.sum(Game.creeps, (c) => c.memory.role == "carrier");
-  var numberOfTransporter = _.sum(
+  let numberOfCarrier = _.sum(Game.creeps, (c) => c.memory.role == "carrier");
+  let numberOfTransporter = _.sum(
     Game.creeps,
     (c) => c.memory.role == "transporter"
   );
-  var numberOfMiner = _.sum(Game.creeps, (c) => c.memory.role == "miner");
-  var numberOfTerminalTranspoter = _.sum(Game.creeps, (c) => c.memory.role == "terminalTranspoter");
+  let numberOfMiner = _.sum(Game.creeps, (c) => c.memory.role == "miner");
+  let numberOfTerminalTranspoter = _.sum(
+    Game.creeps,
+    (c) => c.memory.role == "terminalTranspoter"
+  );
 
-  // 判断是否孵化中
-  var mySpawn = Game.spawns.Spawn1;
-
-  // if (Game.spawns.Spawn1.spawning) {
-  //   mySpawn = Game.spawns.Spawn2;
-  // } else if(Game.spawns.Spawn2.spawning){
-  //      mySpawn = Game.spawns.Spawn3;
-  // }else if(Game.spawns.Spawn3.spawning){
-  //     mySpawn = Game.spawns.Spawn1;
-  // }
-
-  // var energy = Game.spawns.Spawn1.room.energyCapacityAvailable;
-  var name = undefined;
-
-  if (numberOfCarrier < minimumNumberOfCarrier) {
+  let mySpawn = Game.spawns.Spawn1;
+  let name = undefined;
+  //判断 角色数量 执行生产逻辑
+  if (numberOfCarrier < config.roleNumber.minCarrier)
     name = mySpawn.createCustomCreep(1000, "carrier");
-  }
-  // 搬运能量到storage
-  else if (numberOfTransporter < minimumNumberOfTransporter) {
-    // try to spawn one
+  if (numberOfTransporter < config.roleNumber.minTransporter)
     name = mySpawn.createCustomCreep(800, "transporter");
-  }
-  // if not enough harvesters
-  else if (numberOfHarvesters1 < minimumNumberOfHarvesters) {
-    // try to spawn one
+  if (numberOfHarvesters1 < config.roleNumber.minHarvesters)
     name = mySpawn.createCustomCreep(1000, "harvester1");
-    // if spawning failed and we have no harvesters left
-  } else if (numberOfHarvesters2 < minimumNumberOfHarvesters) {
-    // try to spawn one
+  if (numberOfHarvesters2 < config.roleNumber.minHarvesters)
     name = mySpawn.createCustomCreep(1000, "harvester2");
-  }
-
-  // if not enough upgraders
-  else if (numberOfUpgraders < minimumNumberOfUpgraders) {
-    // try to spawn one
+  if (numberOfUpgraders < config.roleNumber.minUpgraders)
     name = mySpawn.createCustomCreep(800, "upgrader");
-  }
-
-  // if not enough repairers
-  else if (numberOfRepairers < minimumNumberOfRepairers) {
-    // try to spawn one
+  if (numberOfRepairers < config.roleNumber.minRepairers)
     name = mySpawn.createCustomCreep(600, "repairer");
-  }
-
-  // if not enough builders
-  else if (numberOfBuilders < minimumNumberOfBuilders) {
-    // try to spawn one
+  if (numberOfBuilders < config.roleNumber.minBuilders)
     name = mySpawn.createCustomCreep(800, "builder");
-  }
-
-  // if not enough wallRepairers
-  else if (numberOfWallRepairers < minimumNumberOfWallRepairers) {
-    // try to spawn one
+  if (numberOfWallRepairers < config.roleNumber.minWallRepairers)
     name = mySpawn.createCustomCreep(600, "wallRepairer");
-  } else if (numberOfMiner < minimumNumberOfMiner) {
-    // try to spawn one
+  if (numberOfMiner < config.roleNumber.minMiner)
     name = mySpawn.createCustomCreep(800, "miner");
-  } 
   // else if (numberOfTerminalTranspoter < minimumNumberOfMiner) {
   //   // try to spawn one
   //   name = mySpawn.createCustomCreep(800, "terminalTranspoter");
-  // } 
-  else if (
+  // }
+  if (
     Game.rooms.W7N14.storage.store[RESOURCE_ENERGY] >= 100000 &&
     numberOfBuilders < 1
-  ) {
+  )
     name = mySpawn.createCustomCreep(600, "builder");
-  }
 };
