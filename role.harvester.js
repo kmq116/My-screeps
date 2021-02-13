@@ -5,7 +5,6 @@ module.exports = {
 
 
         // 判断工作状态
-
         if (creep.memory.working == false && creep.store.getFreeCapacity() == 0) {
             creep.memory.working = true
         }

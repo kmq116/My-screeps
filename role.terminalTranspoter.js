@@ -15,7 +15,7 @@ var roleTerminalTranspoter = {
     // 不能工作先去storage取矿 工作则运送能量
     if (creep.memory.working == false) {
       if (
-        creep.withdraw(Game.rooms.W7N14.storage, RESOURCE_LEMERGIUM) ==
+        creep.withdraw(Game.rooms.W7N14.storage, RESOURCE_ENERGY) ==
         ERR_NOT_IN_RANGE
       ) {
         creep.moveTo(Game.rooms.W7N14.storage);
@@ -35,7 +35,7 @@ var roleTerminalTranspoter = {
       // if we found one
       if (structure != undefined) {
         // try to transfer energy, if it is not in range
-        if (creep.transfer(structure, RESOURCE_LEMERGIUM) == ERR_NOT_IN_RANGE) {
+        if (creep.transfer(structure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
           // move towards it
           creep.moveTo(structure);
         }

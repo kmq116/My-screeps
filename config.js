@@ -9,6 +9,7 @@ const config = {
     minCarrier: 2,
     minTransporter: 1,
     minMiner: 1,
+    minInvader:2
   },
   bodyParts:{
       
