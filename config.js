@@ -8,8 +8,9 @@ const config = {
     minWallRepairers: 1,
     minCarrier: 2,
     minTransporter: 1,
+    minTerminalTransporter: 1,
     minMiner: 1,
-    minInvader:2
+    minInvader:3
   },
   bodyParts:{
       

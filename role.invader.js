@@ -20,16 +20,17 @@ let roleInvader = {
 
       // if creep is supposed to transfer energy to a structure
       if (creep.memory.working == true) {
-        // if (creep.transfer(Game.rooms.W7N14.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-        //     creep.moveTo(Game.rooms.W7N14.storage)
-        // }
         creep.say("📤");
-        // try to upgrade the controller
-        if (
-          creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE
-        ) {
-          // if not in range, move towards the controller
-          creep.moveTo(creep.room.controller);
+        var constructionSite = creep.pos.findClosestByPath(
+          FIND_CONSTRUCTION_SITES
+        );
+        // if one is found
+        if (constructionSite != undefined) {
+          // try to build, if the constructionSite is not in range
+          if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
+            // move towards the constructionSite
+            creep.moveTo(constructionSite);
+          }
         }
       } else {
         creep.say("⛏️");

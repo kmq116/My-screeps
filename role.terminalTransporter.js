@@ -1,4 +1,4 @@
-var roleTerminalTranspoter = {
+var roleTerminalTransporter = {
   run: function (creep) {
     // 判断工作状态
 
@@ -43,4 +43,4 @@ var roleTerminalTranspoter = {
     }
   },
 };
-module.exports = roleTerminalTranspoter;
+module.exports = roleTerminalTransporter;

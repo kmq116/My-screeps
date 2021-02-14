@@ -8,7 +8,7 @@ const roleWallRepairer = require("role.wallRepairer");
 const roleCarrier = require("role.carrier");
 const roleTransporter = require("role.transporter");
 const roleMiner = require("role.miner");
-const roleTerminalTranspoter = require("role.terminalTranspoter");
+const roleTerminalTransporter = require("role.terminalTransporter");
 const roleInvader = require("role.invader");
 const config = require("config");
 
@@ -32,7 +32,7 @@ module.exports.loop = function () {
 
   // 通过遍历Memory.creeps检查死亡的小兵的内存   删除内存
   for (let name in Memory.creeps) {
-    // 并检查小兵是否还活着
+    // creep 如果死亡，从内存中删除
     if (Game.creeps[name] == undefined) {
       // 如果不是，则删除内存条目
       delete Memory.creeps[name];
@@ -69,8 +69,8 @@ module.exports.loop = function () {
       transporter: () => {
         roleTransporter.run(creep);
       },
-      terminalTranspoter: () => {
-        roleTerminalTranspoter.run(creep);
+      terminalTransporter: () => {
+        roleTerminalTransporter.run(creep);
       },
       miner: () => {
         roleMiner.run(creep);
@@ -83,13 +83,19 @@ module.exports.loop = function () {
   }
 
   //获得自己房间里的所有建筑
+  // tower 的自动修路 逻辑
   let towers = Game.rooms.W7N14.find(FIND_STRUCTURES, {
     filter: (s) => s.structureType == STRUCTURE_TOWER,
   });
   for (let tower of towers) {
     let target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+    let structure = tower.pos.findClosestByPath(FIND_STRUCTURES, {
+      filter: (s) => s.hits < s.hitsMax && s.structureType != STRUCTURE_WALL&&s.structureType != STRUCTURE_RAMPART,
+    });
     if (target != undefined) {
       tower.attack(target);
+    }else if(structure != undefined){
+      tower.repair(structure);
     }
   }
   // 获得每个角色数量
@@ -120,9 +126,9 @@ module.exports.loop = function () {
     (c) => c.memory.role == "transporter"
   );
   let numberOfMiner = _.sum(Game.creeps, (c) => c.memory.role == "miner");
-  let numberOfTerminalTranspoter = _.sum(
+  let numberOfTerminalTransporter = _.sum(
     Game.creeps,
-    (c) => c.memory.role == "terminalTranspoter"
+    (c) => c.memory.role == "terminalTransporter"
   );
   let numberOfInvader = _.sum(Game.creeps, (c) => c.memory.role == "invader");
 
@@ -150,8 +156,8 @@ module.exports.loop = function () {
   //   name = mySpawn.createCustomCreep(600, "wallRepairer");
   // if (numberOfMiner < config.roleNumber.minMiner)
   //   name = mySpawn.createCustomCreep(800, "miner");
-  // if (numberOfTerminalTranspoter < config.roleNumber.minMiner)
-  //   name = mySpawn.createCustomCreep(800, "terminalTranspoter");
+  if (numberOfTerminalTransporter < config.roleNumber.minMiner)
+    name = mySpawn.createCustomCreep(1000, "terminalTransporter");
   if (numberOfInvader < config.roleNumber.minInvader)
     name = mySpawn.createCustomCreep(1000, "invader");
   // if (
