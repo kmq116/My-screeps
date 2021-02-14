@@ -156,13 +156,9 @@ module.exports.loop = function () {
   //   name = mySpawn.createCustomCreep(600, "wallRepairer");
   // if (numberOfMiner < config.roleNumber.minMiner)
   //   name = mySpawn.createCustomCreep(800, "miner");
-  if (numberOfTerminalTransporter < config.roleNumber.minMiner)
-    name = mySpawn.createCustomCreep(1000, "terminalTransporter");
+  // if (numberOfTerminalTransporter < config.roleNumber.minTerminalTransporter)
+  //   name = mySpawn.createCustomCreep(1000, "terminalTransporter");
   if (numberOfInvader < config.roleNumber.minInvader)
     name = mySpawn.createCustomCreep(1000, "invader");
-  // if (
-  //   Game.rooms.W7N14.storage.store[RESOURCE_ENERGY] >= 100000 &&
-  //   numberOfBuilders < 1
-  // )
-  //   name = mySpawn.createCustomCreep(600, "builder");
+ 
 };
