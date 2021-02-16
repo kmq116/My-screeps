@@ -10,7 +10,7 @@ const config = {
     minTransporter: 1,
     minTerminalTransporter: 1,
     minMiner: 1,
-    minInvader: 4,
+    minInvader: 1,
   },
 };
 

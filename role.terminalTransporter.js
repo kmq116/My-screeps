@@ -14,15 +14,22 @@ var roleTerminalTransporter = {
     }
     // 不能工作先去storage取货 工作则运送货物
     if (creep.memory.working == false) {
-      let target = Game.rooms.W7N14.storage;
-
-      if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(target);
-      }
-    } else {
       let target = Game.rooms.W7N14.find(FIND_STRUCTURES, {
         filter: (s) => s.structureType == STRUCTURE_FACTORY,
       })[0];
+
+      if (creep.withdraw(target, RESOURCE_LEMERGIUM_BAR) == ERR_NOT_IN_RANGE) {
+        creep.moveTo(target);
+      }
+    } else {
+      // let target = Game.rooms.W7N14.find(FIND_STRUCTURES, {
+      //   filter: (s) => s.structureType == STRUCTURE_FACTORY,
+      // })[0];
+      let target = Game.rooms.W7N14.terminal;
+
+      // let target = Game.rooms.W7N14.find(FIND_STRUCTURES, {
+      //   filter: (s) => s.structureType == STRUCTURE_POWER_SPAWN,
+      // })[0];
       // 生产压缩矿物
       try {
         if (target.cooldown === 0) target.produce(RESOURCE_LEMERGIUM_BAR);

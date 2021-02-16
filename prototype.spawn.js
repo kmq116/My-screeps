@@ -2,7 +2,12 @@ module.exports = function () {
   // create a new function for StructureSpawn
   StructureSpawn.prototype.createCustomCreep = function (energy, roleName) {
     var newName = roleName + Game.time;
-    if (roleName == "harvester1" || roleName == "harvester2") {
+    if (
+      roleName == "harvester1" ||
+      roleName == "harvester2" ||
+      roleName == "harvester3" ||
+      roleName == "harvester4"
+    ) {
       var numberOfParts = Math.floor(energy / 200);
       var body = [];
       for (let i = 0; i < numberOfParts; i++) {
@@ -14,7 +19,6 @@ module.exports = function () {
         memory: {
           role: roleName,
           working: false,
-          source: Number(roleName.slice(9)) - 1,
         },
       });
     } else if (roleName == "invader") {
@@ -24,7 +28,56 @@ module.exports = function () {
       for (let i = 0; i < numberOfParts; i++) {
         body.push(WORK);
         body.push(CARRY);
+        body.push(CARRY);
+        body.push(CARRY);
+        body.push(CARRY);
+        body.push(CARRY);
         body.push(MOVE);
+        body.push(MOVE);
+      }
+      return this.spawnCreep(body, newName, {
+        memory: {
+          role: roleName,
+          working: false,
+        },
+      });
+    } else if (roleName == "builder") {
+      var numberOfParts = Math.floor(energy / 200);
+      var body = [];
+      for (let i = 0; i < numberOfParts; i++) {
+        body.push(WORK);
+        body.push(CARRY);
+        body.push(MOVE);
+      }
+      return this.spawnCreep(body, newName, {
+        memory: {
+          role: roleName,
+          working: false,
+        },
+      });
+    } else if (roleName == "carrier") {
+      var numberOfParts = Math.floor(energy / 200);
+      var body = [];
+      for (let i = 0; i < numberOfParts; i++) {
+        body.push(CARRY);
+        body.push(CARRY);
+        body.push(MOVE);
+        body.push(MOVE);
+        body.push(MOVE);
+        body.push(MOVE);
+      }
+      return this.spawnCreep(body, newName, {
+        memory: {
+          role: roleName,
+          working: false,
+        },
+      });
+    } else if (roleName == "upgrader1") {
+      var numberOfParts = Math.floor(energy / 200);
+      var body = [];
+      for (let i = 0; i < numberOfParts; i++) {
+        body.push(WORK);
+        body.push(CARRY);
         body.push(MOVE);
       }
       return this.spawnCreep(body, newName, {
@@ -34,20 +87,21 @@ module.exports = function () {
         },
       });
     } else {
-      var numberOfParts = Math.floor(energy / 200);
-      var body = [];
-      for (let i = 0; i < numberOfParts; i++) {
-        body.push(WORK);
-        body.push(CARRY);
-        body.push(CARRY);
-        body.push(MOVE);
+      {
+        var numberOfParts = Math.floor(energy / 200);
+        var body = [];
+        for (let i = 0; i < numberOfParts; i++) {
+          body.push(WORK);
+          body.push(CARRY);
+          body.push(MOVE);
+        }
+        return this.spawnCreep(body, newName, {
+          memory: {
+            role: roleName,
+            working: false,
+          },
+        });
       }
-      return this.spawnCreep(body, newName, {
-        memory: {
-          role: roleName,
-          working: false,
-        },
-      });
     }
   };
 };
