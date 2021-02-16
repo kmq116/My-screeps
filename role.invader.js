@@ -21,6 +21,7 @@ let roleInvader = {
       // if creep is supposed to transfer energy to a structure
       if (creep.memory.working == true) {
         creep.say("📤");
+        // find closest constructionSite
         var constructionSite = creep.pos.findClosestByPath(
           FIND_CONSTRUCTION_SITES
         );
@@ -34,10 +35,9 @@ let roleInvader = {
         }
       } else {
         creep.say("⛏️");
-        const sources = creep.room.find(FIND_SOURCES);
-        const pos = new RoomPosition(25, 32, "W7N15");
-        if (creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-          creep.moveTo(sources[1]);
+        const source = creep.room.find(FIND_SOURCES)[1];
+        if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(source);
         }
       }
     }

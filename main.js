@@ -13,22 +13,22 @@ const roleInvader = require("role.invader");
 const config = require("config");
 
 module.exports.loop = function () {
-  const linkDown = Game.rooms["W7N14"].lookForAt("structure", 44, 30)[0];
-  const linkUp = Game.rooms["W7N14"].lookForAt("structure", 40, 19)[0];
 
   // link 传送能量
-  function linkTransfer(link) {
-    const linkTo = linkUp.pos.findInRange(FIND_MY_STRUCTURES, 9, {
+  (function () {
+    const linkDown = Game.rooms["W7N14"].lookForAt("structure", 44, 30)[0];
+    const linkUp = Game.rooms["W7N14"].lookForAt("structure", 40, 19)[0];
+    const Main = linkUp.pos.findInRange(FIND_MY_STRUCTURES, 9, {
       filter: { structureType: STRUCTURE_LINK },
     })[0];
-    return link.transferEnergy(linkTo);
-  }
-  if (linkUp.store.getFreeCapacity(RESOURCE_ENERGY) <= 100) {
-    linkTransfer(linkUp);
-  }
-  if (linkDown.store.getFreeCapacity(RESOURCE_ENERGY) <= 100) {
-    linkTransfer(linkDown);
-  }
+
+    if (linkUp.store.getFreeCapacity(RESOURCE_ENERGY) <= 100) {
+      linkUp.transferEnergy(Main);
+    }
+    if (linkDown.store.getFreeCapacity(RESOURCE_ENERGY) <= 100) {
+      linkDown.transferEnergy(Main);
+    }
+  })();
 
   // 通过遍历Memory.creeps检查死亡的小兵的内存   删除内存
   for (let name in Memory.creeps) {
@@ -79,7 +79,9 @@ module.exports.loop = function () {
         roleInvader.run(creep);
       },
     };
-    minRoles[creep.memory.role]();
+    try {
+      minRoles[creep.memory.role]();
+    } catch (error) {}
   }
 
   //获得自己房间里的所有建筑
@@ -90,13 +92,14 @@ module.exports.loop = function () {
   for (let tower of towers) {
     let target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
     let structure = tower.pos.findClosestByPath(FIND_STRUCTURES, {
-      filter: (s) => s.hits < s.hitsMax && s.structureType != STRUCTURE_WALL&&s.structureType != STRUCTURE_RAMPART,
+      filter: (s) =>
+        s.hits < s.hitsMax &&
+        s.structureType != STRUCTURE_WALL &&
+        s.structureType != STRUCTURE_RAMPART,
     });
-    if (target != undefined) {
-      tower.attack(target);
-    }else if(structure != undefined){
-      tower.repair(structure);
-    }
+
+    if (target != undefined) tower.attack(target);
+    else if (structure != undefined) tower.repair(structure);
   }
   // 获得每个角色数量
   let numberOfHarvesters1 = _.sum(
@@ -132,11 +135,13 @@ module.exports.loop = function () {
   );
   let numberOfInvader = _.sum(Game.creeps, (c) => c.memory.role == "invader");
 
+  // 两个生产互相切换
   let mySpawn = Game.spawns.Spawn1;
   if (mySpawn.spawning) {
     mySpawn = Game.spawns.Spawn2;
   }
   let name = undefined;
+
   //判断 角色数量 执行生产逻辑
   if (numberOfCarrier < config.roleNumber.minCarrier)
     name = mySpawn.createCustomCreep(1000, "carrier");
@@ -152,13 +157,12 @@ module.exports.loop = function () {
   //   name = mySpawn.createCustomCreep(600, "repairer");
   // if (numberOfBuilders < config.roleNumber.minBuilders)
   //   name = mySpawn.createCustomCreep(800, "builder");
-  // if (numberOfWallRepairers < config.roleNumber.minWallRepairers)
-  //   name = mySpawn.createCustomCreep(600, "wallRepairer");
+  if (numberOfWallRepairers < config.roleNumber.minWallRepairers)
+    name = mySpawn.createCustomCreep(600, "wallRepairer");
   // if (numberOfMiner < config.roleNumber.minMiner)
   //   name = mySpawn.createCustomCreep(800, "miner");
-  // if (numberOfTerminalTransporter < config.roleNumber.minTerminalTransporter)
-  //   name = mySpawn.createCustomCreep(1000, "terminalTransporter");
+  if (numberOfTerminalTransporter < config.roleNumber.minTerminalTransporter)
+    name = mySpawn.createCustomCreep(1000, "terminalTransporter");
   if (numberOfInvader < config.roleNumber.minInvader)
-    name = mySpawn.createCustomCreep(1000, "invader");
- 
+    name = mySpawn.createCustomCreep(1200, "invader");
 };

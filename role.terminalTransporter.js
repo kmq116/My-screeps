@@ -12,32 +12,25 @@ var roleTerminalTransporter = {
     ) {
       creep.memory.working = false;
     }
-    // 不能工作先去storage取矿 工作则运送能量
+    // 不能工作先去storage取货 工作则运送货物
     if (creep.memory.working == false) {
-      if (
-        creep.withdraw(Game.rooms.W7N14.storage, RESOURCE_ENERGY) ==
-        ERR_NOT_IN_RANGE
-      ) {
-        creep.moveTo(Game.rooms.W7N14.storage);
+      let target = Game.rooms.W7N14.storage;
+
+      if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+        creep.moveTo(target);
       }
     } else {
-      // var structure = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
-      //   // the second argument for findClosestByPath is an object which takes
-      //   // a property called filter which can be a function
-      //   // we use the arrow operator to define it
-      //   filter: (s) =>
-      //     (s.structureType == STRUCTURE_TERMINAL ) &&
-      //     s.energy < s.energyCapacity,
-      // });
+      let target = Game.rooms.W7N14.find(FIND_STRUCTURES, {
+        filter: (s) => s.structureType == STRUCTURE_FACTORY,
+      })[0];
+      // 生产压缩矿物
+      try {
+        if (target.cooldown === 0) target.produce(RESOURCE_LEMERGIUM_BAR);
+      } catch (error) {}
 
-      var structure = Game.rooms.W7N14.terminal;
-
-      // if we found one
-      if (structure != undefined) {
-        // try to transfer energy, if it is not in range
-        if (creep.transfer(structure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-          // move towards it
-          creep.moveTo(structure);
+      for (const resourceType in creep.carry) {
+        if (creep.transfer(target, resourceType) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(target);
         }
       }
     }
