@@ -18,7 +18,7 @@ var roleTransporter = {
       //   搬运能量
       if (linkMain.store[RESOURCE_ENERGY]) {
         if (creep.withdraw(linkMain, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-          creep.moveTo(linkMain);
+          creep.moveTo(linkMain, { reusePath: 5 });
         }
       }
     

@@ -61,9 +61,6 @@ module.exports.loop = function () {
       transporter: () => {
         roleTransporter.run(creep);
       },
-      terminalTransporter: () => {
-        roleTerminalTransporter.run(creep);
-      },
       miner: () => {
         roleMiner.run(creep);
       },
@@ -162,8 +159,8 @@ module.exports.loop = function () {
     name = otherSpawn.createCustomCreep(800, "harvester4");
   if (numberOfUpgraders < config.roleNumber.minUpgraders)
     name = mySpawn.createCustomCreep(300, "upgrader1");
-  if (numberOfUpgradersW7N15 < config.roleNumber.minUpgraders)
-    name = otherSpawn.createCustomCreep(300, "upgraderW7N15");
+  if (numberOfUpgradersW7N15 < 5)
+    name = otherSpawn.createCustomCreep(1000, "upgraderW7N15");
   // if (numberOfRepairers < config.roleNumber.minRepairers)
   //   name = mySpawn.createCustomCreep(600, "repairer");
   if (numberOfBuilders < config.roleNumber.minBuilders)

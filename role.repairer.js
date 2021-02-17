@@ -32,7 +32,7 @@ module.exports = {
                 // try to repair it, if it is out of range
                 if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
                     // move towards it
-                    creep.moveTo(structure);
+                    creep.moveTo(structure, { reusePath: 5 });
                 }
             }
             // if we can't fine one
@@ -44,7 +44,7 @@ module.exports = {
         // if creep is supposed to harvest energy from source
         else {
             if (creep.withdraw(Game.rooms.W7N14.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(Game.rooms.W7N14.storage);
+                creep.moveTo(Game.rooms.W7N14.storage, { reusePath: 5 });
             }
         }
     }

@@ -3,7 +3,7 @@ module.exports = (sourceId) => ({
   source: (creep) => {
     const source = Game.getObjectById(sourceId);
     if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
-      creep.moveTo(source);
+      creep.moveTo(source, { reusePath: 5 });
   },
   //   给link传送能量
   target: (creep) => {
@@ -26,7 +26,7 @@ module.exports = (sourceId) => ({
       if (creep.transfer(structure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
         // move towards it
         creep.say("🚚");
-        creep.moveTo(structure);
+        creep.moveTo(structure, { reusePath: 5 });
       }
     }
   },

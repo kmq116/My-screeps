@@ -29,9 +29,6 @@ module.exports = function () {
         body.push(WORK);
         body.push(CARRY);
         body.push(CARRY);
-        body.push(CARRY);
-        body.push(CARRY);
-        body.push(CARRY);
         body.push(MOVE);
         body.push(MOVE);
       }

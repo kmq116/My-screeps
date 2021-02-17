@@ -21,7 +21,7 @@ module.exports = {
         creep.transfer(Game.rooms.W7N14.terminal, RESOURCE_LEMERGIUM) ==
         ERR_NOT_IN_RANGE
       ) {
-        creep.moveTo(Game.rooms.W7N14.terminal);
+        creep.moveTo(Game.rooms.W7N14.terminal, { reusePath: 5 });
       }
     }
     // if creep is supposed to harvest energy from source
@@ -32,7 +32,7 @@ module.exports = {
       // try to harvest energy, if the source is not in range
       if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
         // move towards the source
-        creep.moveTo(sources[0]);
+        creep.moveTo(sources[0], { reusePath: 5 });
       }
     }
   },

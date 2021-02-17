@@ -51,7 +51,7 @@ module.exports = {
         // try to repair it, if not in range
         if (creep.repair(target) == ERR_NOT_IN_RANGE) {
           // move towards it
-          creep.moveTo(target);
+          creep.moveTo(target, { reusePath: 5 });
         }
       }
       // if we can't fine one
@@ -66,7 +66,7 @@ module.exports = {
         creep.withdraw(Game.rooms.W7N14.storage, RESOURCE_ENERGY) ==
         ERR_NOT_IN_RANGE
       ) {
-        creep.moveTo(Game.rooms.W7N14.storage);
+        creep.moveTo(Game.rooms.W7N14.storage, { reusePath: 5 });
       }
     }
   },
