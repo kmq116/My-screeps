@@ -1,8 +1,7 @@
 // 导入模块
-require("prototype.spawn")();
+require("mount.spawn")();
 require("mount.creep")();
 require("mount.tower")();
-const config = require("config");
 
 module.exports.loop = function () {
   // // link 传送能量
