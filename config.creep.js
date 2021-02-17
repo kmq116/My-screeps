@@ -3,12 +3,17 @@ const upgrader = require("role.upgrader");
 const builder = require("role.builder");
 const carrier = require("role.carrier");
 const invader = require("role.invader");
+const transporter = require("role.transporter")
+const wallRepairer = require ("role.wallRepairer")
 const terminalTransporter = require("role.terminalTransporter");
+
 module.exports = {
   // W7N14
   harvester1: harvester("5bbcac7e9099fc012e6358d3"),
   harvester2: harvester("5bbcac7e9099fc012e6358d2"),
   carrier: carrier("5f2faee527d67001743a955d"),
+  transporter:transporter("5f75a047075e74f8ef024e1b"),
+  wallRepairer:wallRepairer("5f2faee527d67001743a955d"),
   // from to type
   terminalTransporter: terminalTransporter(
     "5f2faee527d67001743a955d",

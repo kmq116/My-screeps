@@ -7,7 +7,7 @@ module.exports = (sourceId) => ({
   },
   //   给link传送能量
   target: (creep) => {
-    var structure = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
+    let structure = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
       // the second argument for findClosestByPath is an object which takes
       // a property called filter which can be a function
       // we use the arrow operator to define it
@@ -17,9 +17,10 @@ module.exports = (sourceId) => ({
           s.structureType == STRUCTURE_TOWER ||
           s.structureType == STRUCTURE_POWER_SPAWN) &&
         s.energy < s.energyCapacity,
+      algorithm: "dijkstra",
     });
 
-    //  var  structure = Game.rooms.W7N14.terminal
+    //  let  structure = Game.rooms.W7N14.terminal
     // if we found one
     if (structure != undefined) {
       // try to transfer energy, if it is not in range

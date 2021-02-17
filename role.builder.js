@@ -14,7 +14,7 @@ module.exports = (sourceId) => ({
       }
     } else {
       // find closest constructionSite
-      var constructionSite = creep.pos.findClosestByPath(
+      let constructionSite = creep.pos.findClosestByPath(
         FIND_CONSTRUCTION_SITES
       );
       // if one is found
