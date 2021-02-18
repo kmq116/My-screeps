@@ -36,10 +36,8 @@ module.exports.loop = function () {
     creep.work();
   }
 
-
   // Game.rooms.W7N14.memory.spawnList = ['harvesterW7N1401',"harvesterW7N1402","carrierW7N14",'upgraderW7N14','transporterW7N14','wallRepairerW7N14','terminalTransporterW7N14']
-  // Game.rooms.W7N15.memory.spawnList = ['harvesterW7N1501','harvesterW7N1502','carrierW7N15','upgraderW7N15','builderW7N15']
-
+  // Game.rooms.W7N15.memory.spawnList = ['harvesterW7N1502']
 
   //获得自己房间里的所有塔
   let towers = Game.rooms.W7N14.find(FIND_STRUCTURES, {
@@ -50,10 +48,9 @@ module.exports.loop = function () {
   }
 
   // 两个生产互相切换
-  for (let name in Game.spawns) {
-    let spawn = Game.spawns[name];
-    spawn.work();
+  let mySpawn = Game.spawns.Spawn1;
+  if (mySpawn.spawning) {
+    mySpawn = Game.spawns.Spawn2;
   }
-
- 
+  mySpawn.work();
 };

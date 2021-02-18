@@ -23,7 +23,6 @@ const spawnExtension = {
   mainSpawn(taskName) {
     let newName = taskName + Game.time;
     let config = creepNumber.find((item) => item.role == taskName);
-    console.log(config);
     if (config) {
       this.spawnCreep(config.bodys, newName, {
         memory: {

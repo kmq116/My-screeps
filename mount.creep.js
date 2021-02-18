@@ -34,6 +34,8 @@ const creepExtension = {
       const health = this.isHealthy()
       if(!health){
         this.room.memory.spawnList.push(this.memory.role)
+        
+        this.memory.hasSendRebirth = true
       }
     }
 
