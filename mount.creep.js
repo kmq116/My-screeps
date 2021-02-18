@@ -10,19 +10,31 @@ module.exports = function () {
 const creepExtension = {
   // 更新工作状态
   updateState() {
-    // creep 身上没有能量 && creep 之前的状态为“工作”
-    if (this.store[RESOURCE_ENERGY] <= 0 && this.memory.working) {
-      this.memory.working = false;
-      this.say("执行 source 阶段");
-    }
-    // creep 身上能量满了 && creep 之前的状态为“不工作”
-    if (
-      this.store[RESOURCE_ENERGY] >= this.store.getCapacity() &&
-      !this.memory.working
-    ) {
+    if (this.memory.working == false && this.store.getFreeCapacity() == 0) {
       this.memory.working = true;
       this.say("执行 target 阶段");
     }
+    // 工作完成 能量为零 切换状态为 取能量
+    if (
+      this.memory.working == true &&
+      this.store.getFreeCapacity() == this.store.getCapacity()
+    ) {
+      this.memory.working = false;
+      this.say("执行 source 阶段");
+    }
+    // // creep 身上没有能量 && creep 之前的状态为“工作”
+    // if (this.store[RESOURCE_ENERGY] <= 0 && this.memory.working) {
+    //   this.memory.working = false;
+    //   this.say("执行 source 阶段");
+    // }
+    // // creep 身上能量满了 && creep 之前的状态为“不工作”
+    // if (
+    //   this.store[RESOURCE_ENERGY] >= this.store.getCapacity() &&
+    //   !this.memory.working
+    // ) {
+    //   this.memory.working = true;
+    //   this.say("执行 target 阶段");
+    // }
 
     return this.memory.working;
   },
@@ -30,12 +42,11 @@ const creepExtension = {
   work() {
     // 如果 creep 还没有发送重生信息的话，执行健康检查，保证只发送一次生成任务
     // 健康检查不通过则向 spawnList 发送自己的生成任务
-    if(!this.memory.hasSendRebirth){
-      const health = this.isHealthy()
-      if(!health){
-        this.room.memory.spawnList.push(this.memory.role)
-        
-        this.memory.hasSendRebirth = true
+    if (!this.memory.hasSendRebirth) {
+      const health = this.isHealthy();
+      if (!health) {
+        this.room.memory.spawnList.push(this.memory.role);
+        this.memory.hasSendRebirth = true;
       }
     }
 

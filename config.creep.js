@@ -28,8 +28,8 @@ module.exports = {
   wallRepairerW7N15: wallRepairer("602b99f5bf07c5281a28e753"),
   // from to type
   terminalTransporterW7N14: terminalTransporter(
-    "5f2faee527d67001743a955d",
-    "5f572ed57d36e2eb6c6dfebe",
-    RESOURCE_ENERGY
+    "5f455234766bcced898aa2d6",
+    "5fb1893ae7f0760f5449d7ed",
+    RESOURCE_POWER
   ),
 };

@@ -21,6 +21,11 @@ module.exports.loop = function () {
     }
   })();
 
+  let powerSpawn = Game.getObjectById("5fb1893ae7f0760f5449d7ed");
+  // powerSpawn.processPower();
+  // Game.powerCreeps["fhtx"].work();
+  Game.powerCreeps["fhtx"].renew(powerSpawn);
+
   // 通过遍历Memory.creeps检查死亡的小兵的内存   删除内存
   for (let name in Memory.creeps) {
     // creep 如果死亡，从内存中删除
@@ -36,8 +41,8 @@ module.exports.loop = function () {
     creep.work();
   }
 
-  // Game.rooms.W7N14.memory.spawnList = ['harvesterW7N1401',"harvesterW7N1402","carrierW7N14",'upgraderW7N14','transporterW7N14','wallRepairerW7N14','terminalTransporterW7N14']
-  // Game.rooms.W7N15.memory.spawnList = ['wallRepairerW7N15']
+  // Game.rooms.W7N14.memory.spawnList = ["carrierW7N14"]
+  // Game.rooms.W7N15.memory.spawnList = ['harvesterW7N1502']
 
   //获得自己房间里的所有塔
   let towers = Game.rooms.W7N14.find(FIND_STRUCTURES, {
