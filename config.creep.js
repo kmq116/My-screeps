@@ -25,6 +25,7 @@ module.exports = {
   invader: invader("5f2faee527d67001743a955d"),
   transporterW7N14: transporter("5f75a047075e74f8ef024e1b"),
   wallRepairerW7N14: wallRepairer("5f2faee527d67001743a955d"),
+  wallRepairerW7N15: wallRepairer("602b99f5bf07c5281a28e753"),
   // from to type
   terminalTransporterW7N14: terminalTransporter(
     "5f2faee527d67001743a955d",

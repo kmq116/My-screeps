@@ -37,7 +37,7 @@ module.exports.loop = function () {
   }
 
   // Game.rooms.W7N14.memory.spawnList = ['harvesterW7N1401',"harvesterW7N1402","carrierW7N14",'upgraderW7N14','transporterW7N14','wallRepairerW7N14','terminalTransporterW7N14']
-  // Game.rooms.W7N15.memory.spawnList = ['harvesterW7N1502']
+  // Game.rooms.W7N15.memory.spawnList = ['wallRepairerW7N15']
 
   //获得自己房间里的所有塔
   let towers = Game.rooms.W7N14.find(FIND_STRUCTURES, {
@@ -46,11 +46,19 @@ module.exports.loop = function () {
   for (let tower of towers) {
     tower.work();
   }
+  let towersW7N15 = Game.rooms.W7N15.find(FIND_STRUCTURES, {
+    filter: (s) => s.structureType == STRUCTURE_TOWER,
+  });
+  for (let tower of towersW7N15) {
+    tower.work();
+  }
 
   // 两个生产互相切换
   let mySpawn = Game.spawns.Spawn1;
+  let spawn3 = Game.spawns.Spawn3;
   if (mySpawn.spawning) {
     mySpawn = Game.spawns.Spawn2;
   }
   mySpawn.work();
+  spawn3.work();
 };
