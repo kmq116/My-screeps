@@ -28,11 +28,19 @@ const creepExtension = {
   },
 
   work() {
-    if (!(this.memory.role in creepConfigs))
-      return 
-      // console.log(
-      //   `${this.memory.role}内存的role 属性不在 creepConfigs 中`
-      // );
+    // 如果 creep 还没有发送重生信息的话，执行健康检查，保证只发送一次生成任务
+    // 健康检查不通过则向 spawnList 发送自己的生成任务
+    if(!this.memory.hasSendRebirth){
+      const health = this.isHealthy()
+      if(!health){
+        this.room.memory.spawnList.push(this.memory.role)
+      }
+    }
+
+    if (!(this.memory.role in creepConfigs)) return;
+    // console.log(
+    //   `${this.memory.role}内存的role 属性不在 creepConfigs 中`
+    // );
     const creepConfig = creepConfigs[this.memory.role];
     const working = creepConfig.switch ? creepConfig.switch(this) : true;
     if (working) {
@@ -42,5 +50,9 @@ const creepExtension = {
     }
   },
 
- 
+  // creep 监控状态检查
+  isHealthy() {
+    if (this.ticksToLive <= 10) return false;
+    else return true;
+  },
 };

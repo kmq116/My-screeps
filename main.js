@@ -2,6 +2,7 @@
 require("mount.spawn")();
 require("mount.creep")();
 require("mount.tower")();
+const creepNumber = require("config.role.number");
 
 module.exports.loop = function () {
   // // link 传送能量
@@ -35,6 +36,11 @@ module.exports.loop = function () {
     creep.work();
   }
 
+
+  // Game.rooms.W7N14.memory.spawnList = ['harvesterW7N1401',"harvesterW7N1402","carrierW7N14",'upgraderW7N14','transporterW7N14','wallRepairerW7N14','terminalTransporterW7N14']
+  // Game.rooms.W7N15.memory.spawnList = ['harvesterW7N1501','harvesterW7N1502','carrierW7N15','upgraderW7N15','builderW7N15']
+
+
   //获得自己房间里的所有塔
   let towers = Game.rooms.W7N14.find(FIND_STRUCTURES, {
     filter: (s) => s.structureType == STRUCTURE_TOWER,
@@ -43,89 +49,11 @@ module.exports.loop = function () {
     tower.work();
   }
 
-  // 获得每个角色数量
-  let numberOfHarvesters1 = _.sum(
-    Game.creeps,
-    (c) => c.memory.role == "harvester1"
-  );
-  let numberOfHarvesters2 = _.sum(
-    Game.creeps,
-    (c) => c.memory.role == "harvester2"
-  );
-  let numberOfHarvesters3 = _.sum(
-    Game.creeps,
-    (c) => c.memory.role == "harvester3"
-  );
-  let numberOfHarvesters4 = _.sum(
-    Game.creeps,
-    (c) => c.memory.role == "harvester4"
-  );
-  let numberOfUpgraders = _.sum(
-    Game.creeps,
-    (c) => c.memory.role == "upgrader1"
-  );
-  let numberOfUpgradersW7N15 = _.sum(
-    Game.creeps,
-    (c) => c.memory.role == "upgraderW7N15"
-  );
-  let numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == "builder");
-  let numberOfRepairers = _.sum(
-    Game.creeps,
-    (c) => c.memory.role == "repairer"
-  );
-  let numberOfWallRepairers = _.sum(
-    Game.creeps,
-    (c) => c.memory.role == "wallRepairer"
-  );
-  let numberOfCarrier = _.sum(Game.creeps, (c) => c.memory.role == "carrier");
-  let numberOfCarrierW7N15 = _.sum(
-    Game.creeps,
-    (c) => c.memory.role == "carrierW7N15"
-  );
-  let numberOfTransporter = _.sum(
-    Game.creeps,
-    (c) => c.memory.role == "transporter"
-  );
-  let numberOfMiner = _.sum(Game.creeps, (c) => c.memory.role == "miner");
-  let numberOfTerminalTransporter = _.sum(
-    Game.creeps,
-    (c) => c.memory.role == "terminalTransporter"
-  );
-  let numberOfInvader = _.sum(Game.creeps, (c) => c.memory.role == "invader");
-
   // 两个生产互相切换
-  let mySpawn = Game.spawns.Spawn1;
-  let otherSpawn = Game.spawns.Spawn3;
-  if (mySpawn.spawning) {
-    mySpawn = Game.spawns.Spawn2;
+  for (let name in Game.spawns) {
+    let spawn = Game.spawns[name];
+    spawn.work();
   }
-  let name = undefined;
 
-  //判断 角色数量 执行生产逻辑
-  if (numberOfCarrier < 1)
-    name = mySpawn.createCustomCreep(1000, "carrier");
-  if (numberOfCarrierW7N15 < 1)
-    name = otherSpawn.createCustomCreep(600, "carrierW7N15");
-  if (numberOfTransporter < 1)
-    name = mySpawn.createCustomCreep(800, "transporter");
-  if (numberOfHarvesters1 < 1)
-    name = mySpawn.createCustomCreep(1000, "harvester1");
-  if (numberOfHarvesters3 < 1)
-    name = otherSpawn.createCustomCreep(800, "harvester3");
-  if (numberOfHarvesters2 < 1)
-    name = mySpawn.createCustomCreep(1000, "harvester2");
-  if (numberOfHarvesters4 < 1)
-    name = otherSpawn.createCustomCreep(800, "harvester4");
-  if (numberOfUpgraders < 1)
-    name = mySpawn.createCustomCreep(300, "upgrader1");
-  if (numberOfUpgradersW7N15 < 5)
-    name = otherSpawn.createCustomCreep(1000, "upgraderW7N15");
-  if (numberOfBuilders < 1)
-    name = otherSpawn.createCustomCreep(1000, "builder");
-  if (numberOfWallRepairers < 1)
-    name = mySpawn.createCustomCreep(600, "wallRepairer");
-  if (numberOfTerminalTransporter < 1)
-    name = mySpawn.createCustomCreep(1000, "terminalTransporter");
-  if (numberOfInvader < 1)
-    name = mySpawn.createCustomCreep(1200, "invader");
+ 
 };
