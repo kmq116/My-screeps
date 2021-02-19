@@ -8,10 +8,8 @@ module.exports = (sourceId, targetId, resourceType) => ({
   // 升级
   target: (creep) => {
     const target = Game.getObjectById(targetId);
-    for (const resourceType in creep.carry) {
-      if (creep.transfer(target, resourceType) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(target, { reusePath: 5 });
-      }
+    if (creep.usePower(PWR_OPERATE_STORAGE, target) == ERR_NOT_IN_RANGE) {
+      creep.moveTo(target);
     }
   },
   //   切换工作状态

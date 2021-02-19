@@ -7,6 +7,7 @@ const invader = require("role.invader");
 const transporter = require("role.transporter");
 const wallRepairer = require("role.wallRepairer");
 const terminalTransporter = require("role.terminalTransporter");
+const powerCreep = require('role.powerCreep')
 
 module.exports = {
   // W7N14
@@ -29,7 +30,13 @@ module.exports = {
   // from to type
   terminalTransporterW7N14: terminalTransporter(
     "5f455234766bcced898aa2d6",
-    "5fb1893ae7f0760f5449d7ed",
-    RESOURCE_POWER
+    "5f2faee527d67001743a955d",
+    RESOURCE_ENERGY
+  ),
+  // from to type
+  powerCreep: powerCreep(
+    "5f455234766bcced898aa2d6",
+    "5f2faee527d67001743a955d",
+    RESOURCE_OPS
   ),
 };

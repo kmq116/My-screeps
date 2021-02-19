@@ -24,7 +24,15 @@ module.exports.loop = function () {
   let powerSpawn = Game.getObjectById("5fb1893ae7f0760f5449d7ed");
   powerSpawn.processPower();
 
-  Game.powerCreeps["fhtx"].work();
+  
+  let fhtx = Game.powerCreeps["fhtx"];
+  fhtx.work();
+
+
+  // if (fhtx.enableRoom(fhtx.room.controller) == ERR_NOT_IN_RANGE) {
+  //   fhtx.moveTo(fhtx.room.controller);
+  // }
+  // Game.powerCreeps['PowerCreep1'].usePower(PWR_OPERATE_SPAWN, Game.spawns['Spawn1']);
 
   // 通过遍历Memory.creeps检查死亡的小兵的内存   删除内存
   for (let name in Memory.creeps) {
