@@ -8,7 +8,10 @@ module.exports = (sourceId, targetId, resourceType) => ({
   // 升级
   target: (creep) => {
     const target = Game.getObjectById(targetId);
-    if (creep.usePower(PWR_OPERATE_STORAGE, target) == ERR_NOT_IN_RANGE) {
+    if (
+      target.effects[0].ticksRemaining < 50 &&
+      creep.usePower(PWR_OPERATE_STORAGE, target) == ERR_NOT_IN_RANGE
+    ) {
       creep.moveTo(target);
     }
   },

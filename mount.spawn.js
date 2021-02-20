@@ -20,11 +20,13 @@ const spawnExtension = {
     // 生成成功后移除任务
     if (spawnSuccess) this.room.memory.spawnList.shift();
   },
+
   mainSpawn(taskName) {
     let newName = taskName + Game.time;
     let config = creepNumber.find((item) => item.role == taskName);
+    let ok = undefined;
     if (config) {
-      this.spawnCreep(config.bodys, newName, {
+      ok = this.spawnCreep(config.bodys, newName, {
         memory: {
           role: taskName,
           working: false,
@@ -32,6 +34,6 @@ const spawnExtension = {
         },
       });
     }
-    return config;
+    return ok == OK ? true : false;
   },
 };

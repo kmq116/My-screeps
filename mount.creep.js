@@ -22,19 +22,6 @@ const creepExtension = {
       this.memory.working = false;
       this.say("执行 source 阶段");
     }
-    // // creep 身上没有能量 && creep 之前的状态为“工作”
-    // if (this.store[RESOURCE_ENERGY] <= 0 && this.memory.working) {
-    //   this.memory.working = false;
-    //   this.say("执行 source 阶段");
-    // }
-    // // creep 身上能量满了 && creep 之前的状态为“不工作”
-    // if (
-    //   this.store[RESOURCE_ENERGY] >= this.store.getCapacity() &&
-    //   !this.memory.working
-    // ) {
-    //   this.memory.working = true;
-    //   this.say("执行 target 阶段");
-    // }
 
     return this.memory.working;
   },
@@ -65,7 +52,7 @@ const creepExtension = {
 
   // creep 监控状态检查
   isHealthy() {
-    if (this.ticksToLive <= 10) return false;
+    if (this.ticksToLive <= 50) return false;
     else return true;
   },
 };

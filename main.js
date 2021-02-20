@@ -21,18 +21,19 @@ module.exports.loop = function () {
     }
   })();
 
+  // 超能注册
   let powerSpawn = Game.getObjectById("5fb1893ae7f0760f5449d7ed");
   powerSpawn.processPower();
 
-  
+  // 超能逻辑
   let fhtx = Game.powerCreeps["fhtx"];
   fhtx.work();
 
-
-  // if (fhtx.enableRoom(fhtx.room.controller) == ERR_NOT_IN_RANGE) {
-  //   fhtx.moveTo(fhtx.room.controller);
-  // }
-  // Game.powerCreeps['PowerCreep1'].usePower(PWR_OPERATE_SPAWN, Game.spawns['Spawn1']);
+  // 工厂生产
+  let factory = Game.getObjectById("5f572ed57d36e2eb6c6dfebe");
+  if (factory.cooldown == 0) {
+    factory.produce(RESOURCE_LEMERGIUM_BAR);
+  }
 
   // 通过遍历Memory.creeps检查死亡的小兵的内存   删除内存
   for (let name in Memory.creeps) {
@@ -49,8 +50,12 @@ module.exports.loop = function () {
     creep.work();
   }
 
-  // Game.rooms.W7N14.memory.spawnList = ["carrierW7N14"]
-  // Game.rooms.W7N15.memory.spawnList = ['harvesterW7N1502']
+  // Game.rooms.W7N15.memory.spawnList = [
+  //   "carrierW7N15",
+  //   "harvesterW7N1501",
+  //   "harvesterW7N1502",
+  // ];
+  // Game.rooms.W7N14.memory.spawnList = ['transporterW7N14']
 
   //获得自己房间里的所有塔
   let towers = Game.rooms.W7N14.find(FIND_STRUCTURES, {
