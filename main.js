@@ -28,6 +28,7 @@ module.exports.loop = function () {
   // 超能逻辑
   let fhtx = Game.powerCreeps["fhtx"];
   fhtx.work();
+  fhtx.usePower(PWR_GENERATE_OPS);
 
   // 工厂生产
   let factory = Game.getObjectById("5f572ed57d36e2eb6c6dfebe");

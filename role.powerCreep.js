@@ -2,14 +2,13 @@ module.exports = (sourceId, targetId, resourceType) => ({
   // 收获能量
   source: (creep) => {
     const source = Game.getObjectById(sourceId);
-    if (creep.withdraw(source, resourceType) == ERR_NOT_IN_RANGE)
+    if (creep.withdraw(source, resourceType, 200) == ERR_NOT_IN_RANGE)
       creep.moveTo(source, { reusePath: 5 });
   },
   // 升级
   target: (creep) => {
     const target = Game.getObjectById(targetId);
     if (
-      target.effects[0].ticksRemaining < 50 &&
       creep.usePower(PWR_OPERATE_STORAGE, target) == ERR_NOT_IN_RANGE
     ) {
       creep.moveTo(target);
