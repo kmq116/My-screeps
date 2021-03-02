@@ -25,10 +25,10 @@ module.exports.loop = function () {
   let powerSpawn = Game.getObjectById("5fb1893ae7f0760f5449d7ed");
   powerSpawn.processPower();
 
-  // 超能逻辑
-  let fhtx = Game.powerCreeps["fhtx"];
-  fhtx.work();
-  fhtx.usePower(PWR_GENERATE_OPS);
+  // // 超能逻辑
+  // let fhtx = Game.powerCreeps["fhtx"];
+  // fhtx.work();
+  // fhtx.usePower(PWR_GENERATE_OPS);
 
   // 工厂生产
   let factory = Game.getObjectById("5f572ed57d36e2eb6c6dfebe");
@@ -55,8 +55,10 @@ module.exports.loop = function () {
   //   "carrierW7N15",
   //   "harvesterW7N1501",
   //   "harvesterW7N1502",
+  //   "upgraderW7N15",
+  //   "builderW7N15",
   // ];
-  // Game.rooms.W7N14.memory.spawnList = ['transporterW7N14']
+  // Game.rooms.W7N14.memory.spawnList = ['invader','invader','invader','invader']
 
   //获得自己房间里的所有塔
   let towers = Game.rooms.W7N14.find(FIND_STRUCTURES, {
