@@ -7,24 +7,17 @@ module.exports = (sourceId) => ({
   },
   //   给link传送能量
   target: (creep) => {
-    if (creep.room.name !== "W7N15") {
-      const pos = new RoomPosition(14, 39, "W7N15");
-      if (creep.moveTo(pos) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(creep.room.controller, { reusePath: 5 });
+    // find closest constructionSite
+    let constructionSite = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+    // if one is found
+    if (constructionSite != undefined) {
+      // try to build, if the constructionSite is not in range
+      if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
+        // move towards the constructionSite
+        creep.moveTo(constructionSite, { reusePath: 5 });
       }
     } else {
-      // find closest constructionSite
-      let constructionSite = creep.pos.findClosestByPath(
-        FIND_CONSTRUCTION_SITES
-      );
-      // if one is found
-      if (constructionSite != undefined) {
-        // try to build, if the constructionSite is not in range
-        if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
-          // move towards the constructionSite
-          creep.moveTo(constructionSite, { reusePath: 5 });
-        }
-      }
+      creep.suicide();
     }
   },
   //   切换工作状态

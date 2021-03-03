@@ -37,10 +37,10 @@ const creepExtension = {
       }
     }
 
-    if (!(this.memory.role in creepConfigs)) return;
-    // console.log(
-    //   `${this.memory.role}内存的role 属性不在 creepConfigs 中`
-    // );
+    if (!(this.memory.role in creepConfigs))
+      return console.log(
+        `${this.memory.role}内存的role 属性不在 creepConfigs 中`
+      );
     const creepConfig = creepConfigs[this.memory.role];
     const working = creepConfig.switch ? creepConfig.switch(this) : true;
     if (working) {

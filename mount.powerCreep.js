@@ -10,7 +10,7 @@ module.exports = function () {
 const powerCreepExtension = {
   // 更新工作状态
   updateState() {
-    if (this.memory.working == false && this.store.getFreeCapacity() <= 300) {
+    if (this.memory.working == false && this.store.getFreeCapacity() <= 200) {
       this.memory.working = true;
       this.say("执行 target 阶段");
     }

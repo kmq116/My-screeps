@@ -59,22 +59,7 @@ const creepNumber = [
   },
   {
     role: "carrierW7N14",
-    bodys: [
-      CARRY,
-      CARRY,
-      CARRY,
-      CARRY,
-      CARRY,
-      CARRY,
-      CARRY,
-      MOVE,
-      MOVE,
-      MOVE,
-      MOVE,
-      MOVE,
-      MOVE,
-      MOVE,
-    ],
+    bodys: [CARRY, CARRY, MOVE, MOVE],
     number: 1,
   },
   {
@@ -89,14 +74,7 @@ const creepNumber = [
   },
   {
     role: "wallRepairerW7N15",
-    bodys: [
-      WORK,
-      WORK,
-      CARRY,
-      CARRY,
-      MOVE,
-      MOVE,
-    ],
+    bodys: [WORK, WORK, CARRY, CARRY, MOVE, MOVE],
     number: 1,
   },
   {
@@ -115,8 +93,20 @@ const creepNumber = [
     number: 1,
   },
   {
-    role: "repairerW7N15",
+    role: "builderW7N14",
     bodys: [
+      WORK,
+      WORK,
+      CARRY,
+      CARRY,
+      MOVE,
+      MOVE,
+      WORK,
+      WORK,
+      CARRY,
+      CARRY,
+      MOVE,
+      MOVE,
       WORK,
       WORK,
       CARRY,
@@ -127,15 +117,13 @@ const creepNumber = [
     number: 1,
   },
   {
+    role: "repairerW7N15",
+    bodys: [WORK, WORK, CARRY, CARRY, MOVE, MOVE],
+    number: 1,
+  },
+  {
     role: "invader",
-    bodys: [
-      WORK,
-      WORK,
-      CARRY,
-      CARRY,
-      MOVE,
-      MOVE,
-    ],
+    bodys: [WORK, WORK, CARRY, CARRY, MOVE, MOVE],
     number: 1,
   },
 ];

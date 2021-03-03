@@ -25,6 +25,7 @@ module.exports = {
   upgraderW7N15: upgrader(storage.W7N15),
   upgraderW7N14: upgrader(storage.W7N14),
 
+  builderW7N14: builder(storage.W7N14),
   builderW7N15: builder(storage.W7N15),
   repairerW7N15: repairer(storage.W7N15),
 
