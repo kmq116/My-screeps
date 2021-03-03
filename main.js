@@ -58,7 +58,7 @@ module.exports.loop = function () {
   //   "upgraderW7N15",
   //   "builderW7N15",
   // ];
-  // Game.rooms.W7N14.memory.spawnList = ['invader','invader','invader','invader']
+//   Game.rooms.W7N14.memory.spawnList = ['invader','invader','invader','invader']
 
   //获得自己房间里的所有塔
   let towers = Game.rooms.W7N14.find(FIND_STRUCTURES, {

@@ -10,6 +10,7 @@ module.exports = (sourceId) => ({
     let control = Game.getObjectById("5bbcac7e9099fc012e6358d0");
     if (creep.upgradeController(control, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
       creep.moveTo(control, { reusePath: 5 });
+    
   },
   //   切换工作状态
   switch: (creep) => creep.updateState(),
