@@ -1,5 +1,6 @@
 // 引入 creep number 配置项
-const creepNumber = require("config.role.number");
+const creepNumber = require("config.bodys");
+
 // 将拓展签入 Creep 原型
 module.exports = function () {
   _.assign(Spawn.prototype, spawnExtension);

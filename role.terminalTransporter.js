@@ -4,14 +4,14 @@ module.exports = (sourceId, targetId, resourceType) => ({
     const source = Game.getObjectById(sourceId);
     
     if (creep.withdraw(source, resourceType) == ERR_NOT_IN_RANGE)
-      creep.moveTo(source, { reusePath: 5 });
+      creep.moveTo(source, );
   },
   // 升级
   target: (creep) => {
     const target = Game.getObjectById(targetId);
     for (const resourceType in creep.carry) {
       if (creep.transfer(target, resourceType) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(target, { reusePath: 5 });
+        creep.moveTo(target, );
       }
     }
   },

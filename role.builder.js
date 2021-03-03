@@ -3,7 +3,7 @@ module.exports = (sourceId) => ({
   source: (creep) => {
     const source = Game.getObjectById(sourceId);
     if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
-      creep.moveTo(source, { reusePath: 5 });
+      creep.moveTo(source, );
   },
   //   给link传送能量
   target: (creep) => {
@@ -14,7 +14,7 @@ module.exports = (sourceId) => ({
       // try to build, if the constructionSite is not in range
       if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
         // move towards the constructionSite
-        creep.moveTo(constructionSite, { reusePath: 5 });
+        creep.moveTo(constructionSite, );
       }
     } else {
       creep.suicide();

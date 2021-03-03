@@ -5,6 +5,16 @@ require("mount.tower")();
 require("mount.powerCreep")();
 
 module.exports.loop = function () {
+  // market 买能量
+  let market = Game.getObjectById("5f455234766bcced898aa2d6");
+  if (market.cooldown == 0) {
+    Game.market.deal(
+      "6027ec8964712e695b0a1eb8",
+      market.store[RESOURCE_ENERGY],
+      "W7N14"
+    );
+  }
+
   // // link 传送能量
   (function () {
     const linkDown = Game.rooms["W7N14"].lookForAt("structure", 44, 30)[0];
@@ -54,9 +64,9 @@ module.exports.loop = function () {
   }
 
   // Game.rooms.W7N14.memory.spawnList = [
-  //   "builderW7N14",
-  // ];
-  //   Game.rooms.W7N14.memory.spawnList = ['invader','invader','invader','invader']
+  //     "builderW7N14",
+  //   ];
+  // Game.rooms.W7N15.memory.spawnList = ['harvesterW7N1501','harvesterW7N1502']
 
   //获得自己房间里的所有塔
   let towers = Game.rooms.W7N14.find(FIND_STRUCTURES, {
@@ -74,10 +84,11 @@ module.exports.loop = function () {
 
   // 两个生产互相切换
   let mySpawn = Game.spawns.Spawn1;
+
   let spawn3 = Game.spawns.Spawn3;
-  if (mySpawn.spawning) {
-    mySpawn = Game.spawns.Spawn2;
-  }
+  // if (mySpawn.spawning) {
+  //   mySpawn = Game.spawns.Spawn2;
+  // }
   mySpawn.work();
   spawn3.work();
 };

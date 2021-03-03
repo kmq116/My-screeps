@@ -3,12 +3,12 @@ module.exports = (sourceId) => ({
   source: (creep) => {
     const source = Game.getObjectById(sourceId);
     if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
-      creep.moveTo(source, { reusePath: 5 });
+      creep.moveTo(source, );
   },
   // 升级
   target: (creep) => {
     if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-      creep.moveTo(creep.room.controller, { reusePath: 5 });
+      creep.moveTo(creep.room.controller, );
     }
   },
   //   切换工作状态

@@ -3,7 +3,7 @@ module.exports = (sourceId) => ({
   source: (creep) => {
     const source = Game.getObjectById(sourceId);
     if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
-      creep.moveTo(source, { reusePath: 5 });
+      creep.moveTo(source, );
   },
   // 升级
   target: (creep) => {
@@ -39,7 +39,7 @@ module.exports = (sourceId) => ({
       // try to repair it, if not in range
       if (creep.repair(target) == ERR_NOT_IN_RANGE) {
         // move towards it
-        creep.moveTo(target, { reusePath: 5 });
+        creep.moveTo(target, );
       }
     }
   },
