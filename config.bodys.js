@@ -1,4 +1,4 @@
-const creepNumber = [
+const creepBodys = [
   {
     role: "harvesterW7N1401",
     bodys: [
@@ -42,15 +42,11 @@ const creepNumber = [
       WORK,
       WORK,
       WORK,
-      WORK,
-      WORK,
-      WORK,
+      // WORK,
       CARRY,
       CARRY,
       CARRY,
       CARRY,
-      CARRY,
-      MOVE,
       MOVE,
       MOVE,
       MOVE,
@@ -65,13 +61,10 @@ const creepNumber = [
       WORK,
       WORK,
       WORK,
-      WORK,
-      WORK,
       CARRY,
       CARRY,
       CARRY,
       CARRY,
-      MOVE,
       MOVE,
       MOVE,
       MOVE,
@@ -84,7 +77,7 @@ const creepNumber = [
   },
   {
     role: "upgraderW7N15",
-    bodys: [WORK, CARRY, MOVE, WORK, CARRY, MOVE],
+    bodys: [WORK, CARRY, MOVE],
   },
   {
     role: "carrierW7N14",
@@ -92,7 +85,7 @@ const creepNumber = [
   },
   {
     role: "carrierW7N15",
-    bodys: [CARRY, CARRY, MOVE, MOVE, CARRY, CARRY, MOVE, MOVE],
+    bodys: [CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
   },
   {
     role: "wallRepairerW7N14",
@@ -162,20 +155,20 @@ const creepNumber = [
   {
     role: "invader",
     bodys: [
-      WORK,
-      WORK,
-      CARRY,
-      CARRY,
+      MOVE,
+      MOVE,
       MOVE,
       MOVE,
       WORK,
       WORK,
+      WORK,
+      WORK,
       CARRY,
       CARRY,
-      MOVE,
-      MOVE,
+      CARRY,
+      CARRY,
     ],
   },
 ];
 
-module.exports = creepNumber;
+module.exports = creepBodys;

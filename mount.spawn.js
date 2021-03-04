@@ -32,8 +32,11 @@ const spawnExtension = {
           role: taskName,
           working: false,
           hasSendRebirth: false,
+          // 哪个房间生产的就 给哪个房间发命令
+          room: this.room.name,
         },
       });
+      console.log(ok);
     }
     return ok == OK ? true : false;
   },

@@ -29,7 +29,7 @@ module.exports = {
   builderW7N15: builder(storage.W7N15),
   repairerW7N15: repairer(storage.W7N15),
 
-  invader: invader(storage.W7N15),
+  invader: invader('5bbcac7e9099fc012e6358cf'),
   transporterW7N14: transporter("5f75a047075e74f8ef024e1b"),
   wallRepairerW7N14: wallRepairer(storage.W7N14),
   wallRepairerW7N15: wallRepairer(storage.W7N15),

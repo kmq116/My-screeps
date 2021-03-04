@@ -3,7 +3,7 @@ module.exports = (sourceId, targetId, resourceType) => ({
   source: (creep) => {
     const source = Game.getObjectById(sourceId);
     if (creep.withdraw(source, resourceType, 400) == ERR_NOT_IN_RANGE)
-      creep.moveTo(source, );
+      creep.moveTo(source);
   },
   // 升级
   target: (creep) => {
@@ -16,7 +16,7 @@ module.exports = (sourceId, targetId, resourceType) => ({
       console.log("extension 可用能量不足80%");
       creep.moveTo(target);
     } else if (
-      creep.room.storage.store.getCapacity() == 1000000 &&
+      creep.room.storage.store.getFreeCapacity() <= 1000 &&
       creep.usePower(PWR_OPERATE_STORAGE, target) == ERR_NOT_IN_RANGE
     ) {
       console.log("storage容量下降");

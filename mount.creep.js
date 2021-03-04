@@ -32,7 +32,12 @@ const creepExtension = {
     if (!this.memory.hasSendRebirth) {
       const health = this.isHealthy();
       if (!health) {
-        this.room.memory.spawnList.push(this.memory.role);
+        // 给自己 母亲房间发消息  防止难产
+        if (this.memory.room) {
+          Game.rooms[this.memory.room].memory.spawnList.push(this.memory.role);
+        } else {
+          this.room.memory.spawnList.push(this.memory.role);
+        }
         this.memory.hasSendRebirth = true;
       }
     }

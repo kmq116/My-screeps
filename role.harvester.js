@@ -10,16 +10,16 @@ module.exports = (sourceId) => ({
       filter: { structureType: STRUCTURE_LINK },
     });
     // 有link给link 传送 否则给storage
-    if (link) {
+    if (link && creep.pos.roomName == "W7N14") {
       if (creep.transfer(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(link, );
+        creep.moveTo(link);
       }
     } else {
       if (
         creep.transfer(Game.rooms.W7N15.storage, RESOURCE_ENERGY) ==
         ERR_NOT_IN_RANGE
       ) {
-        creep.moveTo(Game.rooms.W7N15.storage, );
+        creep.moveTo(Game.rooms.W7N15.storage);
       }
     }
   },
