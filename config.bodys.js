@@ -61,6 +61,7 @@ const creepBodys = [
       WORK,
       WORK,
       WORK,
+      WORK,
       CARRY,
       CARRY,
       CARRY,
@@ -101,6 +102,10 @@ const creepBodys = [
   },
   {
     role: "transporterW7N14",
+    bodys: [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE],
+  },
+  {
+    role: "transporterW7N15",
     bodys: [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE],
   },
   {

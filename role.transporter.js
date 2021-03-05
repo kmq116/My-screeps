@@ -8,10 +8,10 @@ module.exports = (sourceId) => ({
   // 升级
   target: (creep) => {
     if (
-      creep.transfer(Game.rooms.W7N14.storage, RESOURCE_ENERGY) ==
+      creep.transfer(Game.rooms[creep.memory.room].storage, RESOURCE_ENERGY) ==
       ERR_NOT_IN_RANGE
     ) {
-      creep.moveTo(Game.rooms.W7N14.storage);
+      creep.moveTo(Game.rooms[creep.memory.room].storage);
     }
   },
   //   切换工作状态

@@ -31,6 +31,7 @@ module.exports = {
 
   invader: invader('5bbcac7e9099fc012e6358cf'),
   transporterW7N14: transporter("5f75a047075e74f8ef024e1b"),
+  transporterW7N15: transporter("6040dcc3a6bccc07e74f52f7"),
   wallRepairerW7N14: wallRepairer(storage.W7N14),
   wallRepairerW7N15: wallRepairer(storage.W7N15),
   // from to type

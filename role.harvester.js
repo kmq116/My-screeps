@@ -10,7 +10,7 @@ module.exports = (sourceId) => ({
       filter: { structureType: STRUCTURE_LINK },
     });
     // 有link给link 传送 否则给storage
-    if (link && creep.pos.roomName == "W7N14") {
+    if (link) {
       if (creep.transfer(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
         creep.moveTo(link);
       }

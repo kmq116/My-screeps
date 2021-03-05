@@ -4,8 +4,8 @@ require("mount.creep")();
 require("mount.tower")();
 require("mount.powerCreep")();
 
-// Game.rooms.W7N14.memory.spawnList = ["upgraderW7N14"];
-// Game.rooms.W7N15.memory.spawnList = []
+// Game.rooms.W7N14.memory.spawnList = ["transporterW7N14"];
+// Game.rooms.W7N15.memory.spawnList = ["transporterW7N15"]
 
 module.exports.loop = function () {
   //   // market 买能量
@@ -26,9 +26,17 @@ module.exports.loop = function () {
       filter: { structureType: STRUCTURE_LINK },
     })[0];
 
+    let linkUpW7N15 = Game.getObjectById("6040ff2f5d6e9501df00c2b0");
+    let linkMainW7N15 = Game.getObjectById("6040dcc3a6bccc07e74f52f7");
+
+    if (linkUpW7N15.store.getFreeCapacity(RESOURCE_ENERGY) <= 100) {
+      linkUpW7N15.transferEnergy(linkMainW7N15);
+    }
+
     if (linkUp.store.getFreeCapacity(RESOURCE_ENERGY) <= 100) {
       linkUp.transferEnergy(Main);
     }
+
     if (linkDown.store.getFreeCapacity(RESOURCE_ENERGY) <= 100) {
       linkDown.transferEnergy(Main);
     }
@@ -64,8 +72,6 @@ module.exports.loop = function () {
     let creep = Game.creeps[name];
     creep.work();
   }
-
-  
 
   //获得自己房间里的所有塔
   let towers = Game.rooms.W7N14.find(FIND_STRUCTURES, {

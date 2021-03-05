@@ -13,7 +13,18 @@ module.exports = (sourceId) => ({
   },
   //   给link传送能量
   target: (creep) => {
-    if (creep.pos.roomName == "W7N15") {
+    if (
+      creep.pos.roomName == "W7N14" &&
+      creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES)
+    ) {
+      if (
+        creep.build(creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES)) ==
+        ERR_NOT_IN_RANGE
+      ) {
+        // move towards the constructionSite
+        creep.moveTo(creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES));
+      }
+    } else if (creep.pos.roomName == "W7N15") {
       // find closest constructionSite
       let constructionSite = creep.pos.findClosestByPath(
         FIND_CONSTRUCTION_SITES
