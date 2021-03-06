@@ -10,14 +10,14 @@ module.exports = function () {
 const powerCreepExtension = {
   // 更新工作状态
   updateState() {
-    if (this.memory.working == false && this.store.getFreeCapacity() <= 200) {
+    if (this.memory.working == false && this.store.getFreeCapacity() <= 100) {
       this.memory.working = true;
       this.say("执行 target 阶段");
     }
     // 工作完成 能量为零 切换状态为 取能量
     if (
       this.memory.working == true &&
-      this.store.getFreeCapacity() == this.store.getCapacity()
+      this.store.getFreeCapacity() >= this.store.getCapacity() - 100
     ) {
       this.memory.working = false;
       this.say("执行 source 阶段");

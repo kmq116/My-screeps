@@ -7,6 +7,7 @@ module.exports = (sourceId, targetId, resourceType) => ({
   },
   // 升级
   target: (creep) => {
+
     const target = Game.getObjectById(targetId);
     let energy = creep.room.energyCapacityAvailable;
     if (
@@ -21,7 +22,7 @@ module.exports = (sourceId, targetId, resourceType) => ({
     ) {
       console.log("storage容量下降");
       creep.moveTo(target);
-    } else {
+    } else {      
       creep.usePower(PWR_GENERATE_OPS);
     }
   },

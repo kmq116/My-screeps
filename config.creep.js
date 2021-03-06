@@ -36,9 +36,9 @@ module.exports = {
   wallRepairerW7N15: wallRepairer(storage.W7N15),
   // from to type
   terminalTransporterW7N14: terminalTransporter(
-    '5f455234766bcced898aa2d6',
-    "5fb1893ae7f0760f5449d7ed",
-    RESOURCE_POWER
+    storage.W7N14,
+    "5f455234766bcced898aa2d6",
+    RESOURCE_ENERGY
   ),
   // from to type
   powerCreep: powerCreep(

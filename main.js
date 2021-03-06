@@ -4,19 +4,18 @@ require("mount.creep")();
 require("mount.tower")();
 require("mount.powerCreep")();
 
-// Game.rooms.W7N14.memory.spawnList = ["transporterW7N14"];
-// Game.rooms.W7N15.memory.spawnList = ["transporterW7N15"]
+// Game.rooms.W7N14.memory.spawnList = ["terminalTransporterW7N14"];
+// Game.rooms.W7N15.memory.spawnList = ["upgraderW7N15",'upgraderW7N15','upgraderW7N15']
 
 module.exports.loop = function () {
-  //   // market 买能量
-  //   let market = Game.getObjectById("5f455234766bcced898aa2d6");
-  //   if (market.cooldown == 0) {
-  //     Game.market.deal(
-  //       "6027ec8964712e695b0a1eb8",
-  //       market.store[RESOURCE_ENERGY],
-  //       "W7N14"
-  //     );
-  //   }
+
+
+  // market 买能量
+  let market = Game.getObjectById("5f455234766bcced898aa2d6");
+  let orderId = "6030ddb164712e29e6698c43";
+  if (market.cooldown == 0 && market.store[RESOURCE_ENERGY] >= 5000) {
+    Game.market.deal(orderId, 5000, "W7N14");
+  }
 
   // // link 传送能量
   (function () {
@@ -41,6 +40,7 @@ module.exports.loop = function () {
       linkDown.transferEnergy(Main);
     }
   })();
+
   if (Game.cpu.bucket == 10000) {
     Game.cpu.generatePixel();
   }
