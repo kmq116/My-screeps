@@ -2,24 +2,32 @@ module.exports = (sourceId) => ({
   // 收获能量
   source: (creep) => {
     const source = Game.getObjectById(sourceId);
-    if (creep.harvest(source) == ERR_NOT_IN_RANGE) creep.moveTo(source);
+    if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
+      creep.moveTo(source);
   },
   //   给link传送能量
   target: (creep) => {
-    const link = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
-      filter: { structureType: STRUCTURE_LINK },
+    let structure = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
+      // the second argument for findClosestByPath is an object which takes
+      // a property called filter which can be a function
+      // we use the arrow operator to define it
+      filter: (s) =>
+        (s.structureType == STRUCTURE_SPAWN ||
+          s.structureType == STRUCTURE_EXTENSION ||
+          // s.structureType == STRUCTURE_TOWER ||
+          s.structureType == STRUCTURE_POWER_SPAWN) &&
+        s.energy < s.energyCapacity,
+      algorithm: "dijkstra",
     });
-    // 有link给link 传送 否则给storage
-    if (link && creep.pos.roomName == "W7N14") {
-      if (creep.transfer(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(link);
-      }
-    } else {
-      if (
-        creep.transfer(Game.rooms.W7N15.storage, RESOURCE_ENERGY) ==
-        ERR_NOT_IN_RANGE
-      ) {
-        creep.moveTo(Game.rooms.W7N15.storage);
+
+    //  let  structure = Game.rooms.W7N14.terminal
+    // if we found one
+    if (structure != undefined) {
+      // try to transfer energy, if it is not in range
+      if (creep.transfer(structure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+        // move towards it
+        creep.say("🚚");
+        creep.moveTo(structure);
       }
     }
   },

@@ -36,7 +36,6 @@ const spawnExtension = {
           room: this.room.name,
         },
       });
-      console.log(ok);
     }
     return ok == OK ? true : false;
   },
