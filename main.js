@@ -4,10 +4,11 @@ require("mount.creep")();
 require("mount.tower")();
 require("mount.powerCreep")();
 
-// Game.rooms.W7N14.memory.spawnList = ["transporterW7N14","harvesterW7N1401","harvesterW7N1402","upgraderW7N14","carrierW7N14"];
-// Game.rooms.W7N15.memory.spawnList = ["invader",'invader','invader']
+// Game.rooms.W7N14.memory.spawnList = ["invader","invader","invader"];
+// Game.rooms.W7N15.memory.spawnList = ["upgraderW7N15",'upgraderW7N15','upgraderW7N15']
 
 module.exports.loop = function () {
+  // Game.market.deal('6046274364712e36e4593dcb',30000,"W7N14")
   // link 传送能量
   (function () {
     const linkDown = Game.rooms["W7N14"].lookForAt("structure", 44, 30)[0];

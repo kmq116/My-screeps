@@ -2,8 +2,9 @@ module.exports = (sourceId) => ({
   // 收获能量
   source: (creep) => {
     const source = Game.getObjectById(sourceId);
-    if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE)
-      creep.moveTo(source, );
+    if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+      creep.moveTo(source);
+    }
   },
   // 升级
   target: (creep) => {
@@ -17,4 +18,3 @@ module.exports = (sourceId) => ({
   //   切换工作状态
   switch: (creep) => creep.updateState(),
 });
-

@@ -80,6 +80,10 @@ const creepBodys = [
     role: "upgraderW7N15",
     bodys: [
       WORK,
+      WORK,
+      WORK,
+      WORK,
+      WORK,
       CARRY,
       MOVE,
       WORK,

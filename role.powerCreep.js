@@ -7,7 +7,6 @@ module.exports = (sourceId, targetId, resourceType) => ({
   },
   // 升级
   target: (creep) => {
-
     const target = Game.getObjectById(targetId);
     let energy = creep.room.energyCapacityAvailable;
     if (
@@ -22,7 +21,12 @@ module.exports = (sourceId, targetId, resourceType) => ({
     ) {
       console.log("storage容量下降");
       creep.moveTo(target);
-    } else {      
+    } else if (
+      creep.store.getFreeCapacity() == 0 &&
+      creep.transfer(creep.room.terminal, RESOURCE_OPS) == ERR_NOT_IN_RANGE
+    ) {
+      creep.moveTo(creep.room.terminal);
+    } else {
       creep.usePower(PWR_GENERATE_OPS);
     }
   },
