@@ -1,5 +1,5 @@
 // 引入 creep number 配置项
-const creepNumber = require("config.bodys");
+const creepConfig = require("config.bodys");
 
 // 将拓展签入 Creep 原型
 module.exports = function () {
@@ -24,10 +24,12 @@ const spawnExtension = {
 
   mainSpawn(taskName) {
     let newName = taskName + Game.time;
-    let config = creepNumber.find((item) => item.role == taskName);
+    let config = creepConfig.find((item) => item.role == taskName);
+    console.log(config.role);
+    let bodys = calcBodyPart(config.bodys);
     let ok = undefined;
-    if (config) {
-      ok = this.spawnCreep(config.bodys, newName, {
+    if (bodys) {
+      ok = this.spawnCreep(bodys, newName, {
         memory: {
           role: taskName,
           working: false,
@@ -36,7 +38,22 @@ const spawnExtension = {
           room: this.room.name,
         },
       });
+      
     }
+    console.log(ok);
+
     return ok == OK ? true : false;
   },
 };
+
+/**
+ * 计算身体部件的属性
+ * @param {object} bodyConfig
+ */
+function calcBodyPart(bodyConfig) {
+  let config = Object.keys(bodyConfig).map((item) => {
+    return Array(bodyConfig[item]).fill(item);
+  });
+  console.log(config[0][0]);
+  return [].concat(...config);
+}
