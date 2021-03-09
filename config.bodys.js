@@ -42,7 +42,7 @@ const creepBodys = [
       WORK,
       WORK,
       WORK,
-      // WORK,
+      WORK,
       CARRY,
       CARRY,
       CARRY,
