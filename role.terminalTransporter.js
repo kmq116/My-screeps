@@ -1,3 +1,8 @@
+/**
+   * @param {string} sourceId 资源来源
+   * @param {string} targetId 目标
+   * @param  {Resource} resourceType 资源类型
+   */
 module.exports = (sourceId, targetId, resourceType) => ({
   // 收获能量
   source: (creep) => {

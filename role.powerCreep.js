@@ -25,6 +25,8 @@ module.exports = (sourceId, targetId, resourceType) => ({
       creep.store.getFreeCapacity() == 0 &&
       creep.transfer(creep.room.terminal, RESOURCE_OPS) == ERR_NOT_IN_RANGE
     ) {
+      // 我满了，先放下一部分
+      console.log("我满了，先放下一部分");
       creep.moveTo(creep.room.terminal);
     } else {
       creep.usePower(PWR_GENERATE_OPS);

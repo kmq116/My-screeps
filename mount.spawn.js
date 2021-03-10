@@ -25,7 +25,6 @@ const spawnExtension = {
   mainSpawn(taskName) {
     let newName = taskName + Game.time;
     let config = creepConfig.find((item) => item.role == taskName);
-    console.log(config.role);
     let bodys = calcBodyPart(config.bodys);
     let ok = undefined;
     if (bodys) {
@@ -40,7 +39,6 @@ const spawnExtension = {
       });
       
     }
-    console.log(ok);
 
     return ok == OK ? true : false;
   },
@@ -54,6 +52,5 @@ function calcBodyPart(bodyConfig) {
   let config = Object.keys(bodyConfig).map((item) => {
     return Array(bodyConfig[item]).fill(item);
   });
-  console.log(config[0][0]);
   return [].concat(...config);
 }
