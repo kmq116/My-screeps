@@ -1,5 +1,4 @@
-const baseRole = require("./baseRole");
-
+const baseRoles = require("./baseRoles");
 const {
   harvester,
   upgrader,
@@ -11,7 +10,7 @@ const {
   wallRepairer,
   terminalTransporter,
   powerCreep,
-} = baseRole;
+} = baseRoles;
 
 const storage = {
   W7N14: "5f2faee527d67001743a955d",
