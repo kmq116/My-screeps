@@ -1,13 +1,17 @@
-const harvester = require("role.harvester");
-const upgrader = require("role.upgrader");
-const builder = require("role.builder");
-const carrier = require("role.carrier");
-const repairer = require("role.repairer");
-const invader = require("role.invader");
-const transporter = require("role.transporter");
-const wallRepairer = require("role.wallRepairer");
-const terminalTransporter = require("role.terminalTransporter");
-const powerCreep = require("role.powerCreep");
+const baseRole = require("./baseRole");
+
+const {
+  harvester,
+  upgrader,
+  builder,
+  carrier,
+  repairer,
+  invader,
+  transporter,
+  wallRepairer,
+  terminalTransporter,
+  powerCreep,
+} = baseRole;
 
 const storage = {
   W7N14: "5f2faee527d67001743a955d",
@@ -25,16 +29,16 @@ module.exports = {
   upgraderW7N15: upgrader(storage.W7N15),
   upgraderW7N14: upgrader(storage.W7N14),
 
-  builderW7N14: builder(storage.W7N14),
-  builderW7N15: builder(storage.W7N15),
-  repairerW7N15: repairer(storage.W7N15),
+  // builderW7N14: builder(storage.W7N14),
+  // builderW7N15: builder(storage.W7N15),
+  // repairerW7N15: repairer(storage.W7N15),
 
-  invader: invader("5f455234766bcced898aa2d6"),
+  // invader: invader("5f455234766bcced898aa2d6"),
   transporterW7N14: transporter("5f75a047075e74f8ef024e1b"),
   transporterW7N15: transporter("6040dcc3a6bccc07e74f52f7"),
-  wallRepairerW7N14: wallRepairer(storage.W7N14),
-  wallRepairerW7N15: wallRepairer(storage.W7N15),
-  
+  // wallRepairerW7N14: wallRepairer(storage.W7N14),
+  // wallRepairerW7N15: wallRepairer(storage.W7N15),
+
   terminalTransporterW7N14: terminalTransporter(
     storage.W7N14,
     "5f455234766bcced898aa2d6",

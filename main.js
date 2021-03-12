@@ -8,7 +8,9 @@ require("mount.powerCreep")();
 // Game.rooms.W7N15.memory.spawnList = ["builderW7N15",'builderW7N15']
 
 module.exports.loop = function () {
-  // Game.market.deal('60444d3364712e551bad8e67',50000,"W7N14")
+//   try {
+//      Game.market.deal("6045865a64712e34f91f20ef", 100000, "W7N14");
+//   } catch (err) {}
   // link 传送能量
   (function () {
     const linkDown = Game.rooms["W7N14"].lookForAt("structure", 44, 30)[0];
